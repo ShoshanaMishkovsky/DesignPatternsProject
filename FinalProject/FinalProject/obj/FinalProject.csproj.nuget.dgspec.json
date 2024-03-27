@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "H:\\DesignPattern\\project\\FinalProject\\FinalProject\\FinalProject.csproj": {}
+    "H:\\DesignPattern\\project\\DesignPatternsProject\\FinalProject\\FinalProject\\FinalProject.csproj": {}
   },
   "projects": {
-    "H:\\DesignPattern\\project\\FinalProject\\FinalProject\\FinalProject.csproj": {
+    "H:\\DesignPattern\\project\\DesignPatternsProject\\FinalProject\\FinalProject\\FinalProject.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "H:\\DesignPattern\\project\\FinalProject\\FinalProject\\FinalProject.csproj",
+        "projectUniqueName": "H:\\DesignPattern\\project\\DesignPatternsProject\\FinalProject\\FinalProject\\FinalProject.csproj",
         "projectName": "FinalProject",
-        "projectPath": "H:\\DesignPattern\\project\\FinalProject\\FinalProject\\FinalProject.csproj",
+        "projectPath": "H:\\DesignPattern\\project\\DesignPatternsProject\\FinalProject\\FinalProject\\FinalProject.csproj",
         "packagesPath": "C:\\Users\\טורנר אסתר\\.nuget\\packages\\",
-        "outputPath": "H:\\DesignPattern\\project\\FinalProject\\FinalProject\\obj\\",
+        "outputPath": "H:\\DesignPattern\\project\\DesignPatternsProject\\FinalProject\\FinalProject\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
