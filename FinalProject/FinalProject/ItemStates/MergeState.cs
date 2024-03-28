@@ -6,28 +6,28 @@ using System.Threading.Tasks;
 
 namespace FinalProject.FileStates
 {
-    public class StagedState : FileState
+    public class MergeState : ItemState
     {
-        public StagedState(FolderItemContext folder) : base(folder)
+        public MergeState(ItemContext folder) : base(folder)
         {
         }
 
-        public override void Commit()
-        {
-            throw new NotImplementedException();
-        }
-
-        public override void Merge()
+        public override string Commit(ItemContext itemContext)
         {
             throw new NotImplementedException();
         }
 
-        public override void Review()
+        public override string Merge(ItemContext itemContext)
         {
             throw new NotImplementedException();
         }
 
-        public override void Stage()
+        public override void Review(ItemContext itemContext)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override string Stage(ItemContext itemContext)
         {
             throw new NotImplementedException();
         }

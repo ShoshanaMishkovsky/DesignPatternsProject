@@ -5,19 +5,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FinalProject
+namespace FinalProject;
+
+public class File : ItemContext
 {
-    public class File : FolderItemContext
+    public File(string name) : base(name)
     {
-        public File(string name) : base(name)
-        {
 
-        }
-        public override string ShowDetails(string indent)
-        {
-            indent += "\t";
-            return $"{indent}{Name}";
+    }
+    public override string ShowDetails(string indent)
+    {
+        indent += "\t";
+        return $"{indent}{Name}";
 
-        }
     }
 }

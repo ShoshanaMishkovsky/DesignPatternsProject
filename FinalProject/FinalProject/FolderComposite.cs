@@ -5,37 +5,36 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FinalProject
+namespace FinalProject;
+
+public class FolderComposite : ItemContext
 {
-    public class FolderComposite:FolderItemContext
+    public List<ItemContext> Items { get; private set; }
+    public FolderComposite(string name) : base(name)
     {
-        public List<FolderItemContext> Items { get; private set; }
-        public FolderComposite(string name) : base(name)
-        {
-            Items = new List<FolderItemContext>();
-        }
-        public void Add(FolderItemContext item)
-        {
-            Items.Add(item);
-           
-        }
-        public void remove(FolderItemContext item)
-        {
-            var item1 = Items.Find(i => i.Name == item.Name);
-            Items.Remove(item1);
-        }
+        Items = new List<ItemContext>();
+    }
+    public void Add(ItemContext item)
+    {
+        Items.Add(item);
+
+    }
+    public void remove(ItemContext item)
+    {
+        var item1 = Items.Find(i => i.Name == item.Name);
+        Items.Remove(item1);
+    }
 
 
-        public override string ShowDetails(string indent)
+    public override string ShowDetails(string indent)
+    {
+        indent += "\t";
+        string s = $"{indent}{Name}";
+        foreach (var item in Items)
         {
-            indent += "\t";
-            string s = $"{indent}{Name}";
-            foreach (var item in Items)
-            {
-                s += "\n";
-                s += item.ShowDetails(indent);
-            }
-            return s;
+            s += "\n";
+            s += item.ShowDetails(indent);
         }
+        return s;
     }
 }
