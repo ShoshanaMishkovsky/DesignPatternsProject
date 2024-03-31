@@ -12,6 +12,8 @@ public class Branch
     public string Type { get; set; }
 
     public string Name { get; set; }
+    public List<User> Collaborators { get; set; }
+    
 
 
     public Branch(string name)
@@ -46,6 +48,12 @@ public class Branch
     {
         items = branch.items;
         return $"branch {Name} has been merged";
+        string merge = "";
+        for (int i = 0; i < items.Count; i++)
+        {
+            merge += items[i].State.Merge(items[i]);
+        }
+        return merge;
     }
     public string Add()
     {
@@ -85,14 +93,6 @@ public class Branch
         return merge;
     }
 
-    public string Merge()
-    {
-        string merge = "";
-        for (int i = 0; i < items.Count; i++)
-        {
-            merge += items[i].State.Merge(items[i]);
-        }
-        return merge;
-    }
+  
 }
 
