@@ -13,6 +13,14 @@ public class File : ItemContext
     {
 
     }
+
+    public override ItemContext Clone()
+    {
+     File file = new(this.Name);
+        file.State = this.State;
+        return file;
+    }
+
     public override string ShowDetails(string indent)
     {
         indent += "\t";

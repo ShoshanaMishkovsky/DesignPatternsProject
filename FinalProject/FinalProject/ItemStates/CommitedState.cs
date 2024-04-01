@@ -14,23 +14,24 @@ namespace FinalProject.FileStates
 
         public override string Commit(ItemContext itemContext)
         {
-            throw new NotImplementedException();
+            return folder.ErrorMessage();
         }
 
         public override string Merge(ItemContext itemContext)
         {
-            throw new NotImplementedException();
+            return folder.ErrorMessage();
         }
 
-        public override void Review(ItemContext itemContext)
+        public override string Review(ItemContext itemContext)
         {
             itemContext.State = new UnderReviewState(itemContext);
+            return $"{itemContext.Name} has been reviewed";
 
         }
 
         public override string Stage(ItemContext itemContext)
         {
-            throw new NotImplementedException();
+            return folder.ErrorMessage();
         }
     }
 }

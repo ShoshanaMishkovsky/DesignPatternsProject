@@ -37,4 +37,13 @@ public class FolderComposite : ItemContext
         }
         return s;
     }
+
+    public override ItemContext Clone()
+    {
+        FolderComposite folderComposite = new(this.Name);
+        folderComposite.Items=this.Items;
+        folderComposite.State = this.State;
+        return folderComposite;
+
+    }
 }

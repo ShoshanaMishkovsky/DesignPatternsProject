@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FinalProject.FileStates;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,20 +14,38 @@ public class Branch
 
     public string Name { get; set; }
     public List<User> Collaborators { get; set; }
-    
 
 
-    public Branch(string name)
+
+    public Branch(string name, string type)
     {
         items = new List<ItemContext>();
         Name = name;
+        Type = type;
+        Collaborators = new List<User>();
     }
     public Branch(string name, List<ItemContext> items, string type)
     {
         this.items = items;
         Name = name;
         Type = type;
-
+        Collaborators = new List<User>();
+    }
+    public void AddFile(ItemContext itemContext)
+    {
+        items.Add(itemContext);
+    }
+    public void UpdateFile(ItemContext itemContext)
+    {
+        ItemContext item = items.Find(n => n.Name == itemContext.Name);
+        if (item == null)
+        {
+            AddFile(itemContext);
+        }
+        else
+        {
+            item = itemContext;
+        }
     }
 
     public string BranchDetails()
@@ -47,7 +66,6 @@ public class Branch
     public string Merge(Branch branch)
     {
         items = branch.items;
-        return $"branch {Name} has been merged";
         string merge = "";
         for (int i = 0; i < items.Count; i++)
         {
@@ -77,7 +95,7 @@ public class Branch
 
     public void Review()
     {
-        for (int i = 0;i < items.Count; i++)
+        for (int i = 0; i < items.Count; i++)
         {
             items[i].State.Review(items[i]);
         }
@@ -86,13 +104,20 @@ public class Branch
     public string ReadyToMerge()
     {
         string merge = "";
-        for (int i = 0;i<items.Count;i++)
+        for (int i = 0; i < items.Count; i++)
         {
             merge += items[i].State.Merge(items[i]);
         }
         return merge;
     }
+    public void Undo()
+    {
+        for (int i = 0; i < items.Count; i++)
+        {
+            items[i].Undo();
+        }
+    }
 
-  
+
 }
 
