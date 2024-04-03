@@ -9,7 +9,7 @@ namespace FinalProject
 {
     public class BranchInvoke
     {
-        List <string > branchCommands = new List <string> ();
+        List<string> branchCommands;
         public BranchInvoke()
         {
             branchCommands=new List<string> ();

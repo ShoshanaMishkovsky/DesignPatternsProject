@@ -11,7 +11,6 @@ namespace FinalProject;
 
 public abstract class ItemContext
 {
-
     public string Name { get; set; }
     public ItemState State { get; set; }
    
@@ -24,15 +23,12 @@ public abstract class ItemContext
 
     public string ErrorMessage()
     {
-        return $"You can't do this action, you're in {this.State}";
+        return $"You can't do this action, you're in {State}";
     }
     public abstract string ShowDetails(string indent);
    
 
     internal Stack<IMemento> Mementos = new Stack<IMemento>();
-
-
-
 
     public void Backup(string name)
     {
@@ -40,8 +36,6 @@ public abstract class ItemContext
         var temp = this.Clone();
         this.Mementos.Push(new ConcreteMemento(name, temp));
     }
-
-
 
     public virtual void Undo()
     {
@@ -57,14 +51,12 @@ public abstract class ItemContext
         }
     }
 
-
-
     public void ShowHistory()
     {
         Console.WriteLine("Caretaker: Here's the list of mementos:");
         foreach (var item in this.Mementos)
         {
-            Console.WriteLine(item.GetName());
+            Console.WriteLine($"{item.GetName()} is in state {item.GetLastInitialState().State}");
         }
     }
     public abstract ItemContext Clone();

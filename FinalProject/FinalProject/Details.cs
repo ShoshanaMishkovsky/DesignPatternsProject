@@ -10,5 +10,11 @@ namespace FinalProject
     {
         public User User { get; set; }
         public string BranchName { get; set; }
+
+        public Details(User user, string branchName)
+        {
+            User = user;
+            BranchName = branchName;
+        }
     }
 }

@@ -19,6 +19,11 @@ namespace FinalProject.FileStates
 
         public override string Merge(ItemContext itemContext)
         {
+            return folder.ErrorMessage();
+        }
+
+        public override string Push(ItemContext itemContext)
+        {
             itemContext.State = new ReadyToMergeState(itemContext);
             return $"{itemContext.Name} is ready to merge";
         }

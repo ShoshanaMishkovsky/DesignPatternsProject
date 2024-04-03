@@ -19,8 +19,14 @@ namespace FinalProject.FileStates
 
         public override string Merge(ItemContext itemContext)
         {
-            itemContext.State = new MergeState(itemContext);
+            itemContext.State = new DraftState(itemContext);
             return $"{itemContext.Name} has been merged";
+
+        }
+
+        public override string Push(ItemContext itemContext)
+        {
+            throw new NotImplementedException();
         }
 
         public override string Review(ItemContext itemContext)

@@ -11,10 +11,8 @@ public class Branch
 {
     public List<ItemContext> items;
     public string Type { get; set; }
-
     public string Name { get; set; }
     public List<User> Collaborators { get; set; }
-
 
 
     public Branch(string name, string type)
@@ -24,6 +22,7 @@ public class Branch
         Type = type;
         Collaborators = new List<User>();
     }
+
     public Branch(string name, List<ItemContext> items, string type)
     {
         this.items = items;
@@ -31,10 +30,12 @@ public class Branch
         Type = type;
         Collaborators = new List<User>();
     }
+
     public void AddFile(ItemContext itemContext)
     {
         items.Add(itemContext);
     }
+
     public void UpdateFile(ItemContext itemContext)
     {
         ItemContext item = items.Find(n => n.Name == itemContext.Name);
@@ -63,22 +64,24 @@ public class Branch
     {
         return new Branch(name, items, type);
     }
+
     public string Merge(Branch branch)
     {
         items = branch.items;
         string merge = "";
         for (int i = 0; i < items.Count; i++)
         {
-            merge += items[i].State.Merge(items[i]);
+            merge += "\n"+items[i].State.Merge(items[i]);
         }
         return merge;
     }
+
     public string Add()
     {
         string add = "";
         for (int i = 0; i < items.Count; i++)
         {
-            add += items[i].State.Stage(items[i]);
+            add += "\n" + items[i].State.Stage(items[i]);
         }
         return add;
     }
@@ -88,7 +91,7 @@ public class Branch
         string commit = "";
         for (int i = 0; i < items.Count; i++)
         {
-            commit += items[i].State.Commit(items[i]);
+            commit += "\n" + items[i].State.Commit(items[i]);
         }
         return commit;
     }
@@ -106,9 +109,16 @@ public class Branch
         string merge = "";
         for (int i = 0; i < items.Count; i++)
         {
-            merge += items[i].State.Merge(items[i]);
+            merge += "\n" + items[i].State.Push(items[i]);
         }
         return merge;
+    }
+    public void Backup()
+    {
+        for (int i = 0; i < items.Count; i++)
+        {
+            items[i].Backup(items[i].Name);
+        }
     }
     public void Undo()
     {
@@ -117,7 +127,5 @@ public class Branch
             items[i].Undo();
         }
     }
-
-
 }
 

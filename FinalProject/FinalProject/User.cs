@@ -20,6 +20,7 @@ public class User : ICollaborator
         this.Name = name;
         this.Password = password;
         this.BranchItems = new List<Branch>();
+        this.Invoker = new BranchInvoke();
     }
     public void AddFileToBranch(string name, ItemContext item)
     {
@@ -39,20 +40,34 @@ public class User : ICollaborator
         BranchItems.Remove(branch);
 
     }
-    public void CreateABranch(string BranchName, string name, string type)
+    public void CreateABranch(string BranchName, string type)
     {
         Branch branch = BranchItems.Find(b => b.Name == BranchName);
         if (branch == null)
-            BranchItems.Add(new(name, type));
-        else BranchItems.Add(branch.Clone(name, type));
+            BranchItems.Add(new(BranchName, type));
+        else BranchItems.Add(branch.Clone(BranchName, type));
     }
 
-    public void Merge(string name)
+    public void Merge(string name,string type)
     {
-        Branch branch = BranchItems.Find(b => b.Name == name);
+        Branch branch = BranchItems.Find(b => b.Name == name && b.Type == type);
         Branch branch1 = BranchItems.Find(b => b.Name == name && b.Type == "main");
 
         Invoker.AddJob(new MergeCommand(branch1,branch));
+    }
+    public void Push(string name)
+    {
+        Branch branch = BranchItems.Find(b => b.Name == name);
+       
+
+        Invoker.AddJob(new ReadyToMergeCommand(branch));
+    }
+    public void Add(string name)
+    {
+        Branch branch = BranchItems.Find(b => b.Name == name);
+      
+
+        Invoker.AddJob(new AddCommand(branch));
     }
 
     public void Commit(string name)
@@ -72,13 +87,13 @@ public class User : ICollaborator
         Branch branch = BranchItems.Find(b => b.Name == name);
         for (int i = 0; i < branch.Collaborators.Count; i++)
         {
-            bool response = branch.Collaborators[i].Review(new Details() { BranchName = name, User = this });
+            bool response = branch.Collaborators[i].Review(new Details(this,name));
             if (response)
             {
                 count++;
             }
         }
-        if (count > 2)
+        if (count>=branch.Collaborators.Count/2)
         {
             Invoker.AddJob(new ReviewCommand(branch));
         }
@@ -86,7 +101,7 @@ public class User : ICollaborator
 
     public bool Review(Details details)
     {
-        Console.WriteLine($" {Name}, you got a request to review branch {details.BranchName} of {details.User.Name} \ndo yo approve?y/n");
+        Console.WriteLine($"{Name}, you got a request to review branch {details.BranchName} of {details.User.Name} \ndo yo approve?y/n");
         string answer = Console.ReadLine();
         if (answer == "y")
         {

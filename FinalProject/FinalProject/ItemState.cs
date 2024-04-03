@@ -17,5 +17,6 @@ namespace FinalProject
         public abstract string  Commit(ItemContext itemContext);
         public abstract string Stage(ItemContext itemContext);
         public abstract string Review(ItemContext itemContext);
+        public abstract string Push(ItemContext itemContext);
     }
 }

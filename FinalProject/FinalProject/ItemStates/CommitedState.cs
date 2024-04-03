@@ -22,6 +22,11 @@ namespace FinalProject.FileStates
             return folder.ErrorMessage();
         }
 
+        public override string Push(ItemContext itemContext)
+        {
+            return folder.ErrorMessage();
+        }
+
         public override string Review(ItemContext itemContext)
         {
             itemContext.State = new UnderReviewState(itemContext);
